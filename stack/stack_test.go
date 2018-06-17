@@ -2,7 +2,7 @@ package stack
 
 import "testing"
 
-func TestStack(t *testing.T) {
+func TestStackWithNumbers(t *testing.T) {
 	var stack *Stack = New()
 
 	stack.Push(1)
@@ -15,7 +15,24 @@ func TestStack(t *testing.T) {
 		item := stack.Pop()
 
 		if item != i {
-			t.Error("Test Fails", i)
+			t.Error("Test Fails for integers", i)
+		}
+	}
+}
+
+
+func TestStackWithStrings(t *testing.T) {
+	var stringArray = []string {"Hello", "Dolly"}
+	var stack *Stack = New()
+
+	for i := 0; i < len(stringArray); i++ {
+		stack.Push(stringArray[i])
+	}
+
+	for i := len(stringArray) - 1; i > 0; i-- {
+		item := stack.Pop()
+		if item != stringArray[i] {
+			t.Error("Test Fails for strings", item)
 		}
 	}
 }
