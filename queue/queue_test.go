@@ -9,6 +9,10 @@ func TestQueue(t *testing.T) {
 		queue.Push(i)
 	}
 
+	if queue.IsEmpty() {
+		t.Error("Queue should not be empty")
+	}
+
 	if firstItem := queue.Peek(); firstItem.item != 1 {
 		t.Error("Item not pushed", firstItem.item)
 	}

@@ -20,14 +20,14 @@ func New() *Queue {
 func (queue *Queue) Push(item interface{}) *Queue {
 	queueItem := &QueueItem{item: item, next: nil}
 
-	if queue.len == 0 {
+	if queue.IsEmpty() {
 		// insert as first element
 		queue.first = queueItem
 		queue.current = queueItem
 		queue.len++
 		return queue
 	}
-	
+
 	queue.current.next = queueItem
 	queue.current = queueItem
 	queue.len++
@@ -35,7 +35,7 @@ func (queue *Queue) Push(item interface{}) *Queue {
 }
 
 func (queue *Queue) Pop() *QueueItem {
-	if queue.len > 0 {
+	if !queue.IsEmpty() {
 		popItem := queue.first
 		queue.first = popItem.next
 		queue.len--
@@ -45,8 +45,12 @@ func (queue *Queue) Pop() *QueueItem {
 }
 
 func (queue *Queue) Peek() *QueueItem {
-	if queue.len > 0 {
+	if !queue.IsEmpty() {
 		return queue.first
 	}
 	return nil
+}
+
+func (queue *Queue) IsEmpty() bool {
+	return queue.len == 0
 }

@@ -22,7 +22,7 @@ func (stack *Stack) Push(data interface{}) {
 }
 
 func (stack *Stack) Pop() interface{} {
-	if stack.depth > 0 {
+	if !stack.IsEmpty() {
 		item := stack.sp.item
 		stack.sp = stack.sp.next
 		stack.depth--
@@ -32,7 +32,7 @@ func (stack *Stack) Pop() interface{} {
 }
 
 func (stack *Stack) Peek() interface{} {
-	if stack.depth > 0 {
+	if !stack.IsEmpty() {
 		return stack.sp.item
 	}
 	return nil
