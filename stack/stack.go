@@ -10,6 +10,12 @@ type Stack struct {
 	depth uint
 }
 
+func New() *Stack {
+	var stack = new(Stack)
+	stack.depth = 0
+	return stack
+}
+
 func (stack *Stack) Push(data interface{}) {
 	stack.sp = &StackItem{item: data, next: stack.sp}
 	stack.depth++
@@ -32,8 +38,6 @@ func (stack *Stack) Peek() interface{} {
 	return nil
 }
 
-func New() *Stack {
-	var stack = new(Stack)
-	stack.depth = 0
-	return stack
+func (stack *Stack) IsEmpty() bool {
+	return stack.depth == 0
 }
