@@ -6,9 +6,9 @@ type QueueItem struct {
 }
 
 type Queue struct {
-	first   *QueueItem
-	current *QueueItem
-	len     uint
+	first *QueueItem
+	last  *QueueItem
+	len   uint
 }
 
 func New() *Queue {
@@ -17,31 +17,35 @@ func New() *Queue {
 	return newQueue
 }
 
-func (queue *Queue) Push(item interface{}) *Queue {
+// Will append as a last item to the queue
+func (queue *Queue) Enqueue(item interface{}) *Queue {
 	queueItem := &QueueItem{item: item, next: nil}
 
 	if queue.IsEmpty() {
-		// insert as first element
 		queue.first = queueItem
-		queue.current = queueItem
+		queue.last = queueItem
 		queue.len++
 		return queue
 	}
 
-	queue.current.next = queueItem
-	queue.current = queueItem
+	queue.last.next = queueItem
+	queue.last = queue.last.next
 	queue.len++
+
 	return queue
 }
 
-func (queue *Queue) Pop() *QueueItem {
-	if !queue.IsEmpty() {
-		popItem := queue.first
-		queue.first = popItem.next
-		queue.len--
-		return popItem
+// Will remove the item in FIFO fashion
+func (queue *Queue) Dequeue() interface{} {
+	if queue.IsEmpty() {
+		return nil
 	}
-	return nil
+
+	firstItem := queue.first
+	queue.first = firstItem.next
+	queue.len--
+
+	return firstItem.item
 }
 
 func (queue *Queue) Peek() *QueueItem {

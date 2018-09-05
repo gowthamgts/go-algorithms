@@ -6,7 +6,7 @@ func TestQueue(t *testing.T) {
 	var queue = New()
 
 	for i := 1; i < 6; i++ {
-		queue.Push(i)
+		queue.Enqueue(i)
 	}
 
 	if queue.IsEmpty() {
@@ -18,7 +18,7 @@ func TestQueue(t *testing.T) {
 	}
 
 	for i := 1; i < 6; i++ {
-		if poppedElement := queue.Pop(); poppedElement.item != i {
+		if poppedElement := queue.Dequeue(); poppedElement != i {
 			t.Error("Invalid Queue Variable", poppedElement)
 		}
 	}
