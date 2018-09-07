@@ -23,3 +23,22 @@ func TestQueue(t *testing.T) {
 		}
 	}
 }
+
+func TestQueue_IsEmpty(t *testing.T) {
+	queue := New()
+
+	if queue.IsEmpty() == false {
+		t.Error("Queue should be empty")
+	}
+
+	queue.Enqueue(1)
+
+	if queue.IsEmpty() == true {
+		t.Error("Queue contains 1 element - but isEmpty() is true")
+	}
+
+	queue.Dequeue()
+	if queue.IsEmpty() == false {
+		t.Error("Queue should be empty")
+	}
+}

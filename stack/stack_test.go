@@ -3,17 +3,15 @@ package stack
 import "testing"
 
 func TestStackWithNumbers(t *testing.T) {
-	var stack *Stack = New()
+	var stack = New()
 
 	if stack.IsEmpty() == false {
 		t.Error("Stack should be empty")
 	}
 
-	stack.Push(1)
-	stack.Push(2)
-	stack.Push(3)
-	stack.Push(4)
-	stack.Push(5)
+	for i := 0; i < 6; i++ {
+		stack.Push(i)
+	}
 
 	if stack.IsEmpty() == true {
 		t.Error("Stack should not be empty")
@@ -30,7 +28,7 @@ func TestStackWithNumbers(t *testing.T) {
 
 func TestStackWithStrings(t *testing.T) {
 	var stringArray = []string{"Hello", "Dolly"}
-	var stack *Stack = New()
+	var stack = New()
 
 	if stack.IsEmpty() == false {
 		t.Error("Stack should be empty")
