@@ -22,3 +22,9 @@ func VerifySortedSet(array []int) bool {
 	}
 	return true
 }
+
+func Swap(a *int, b *int) {
+	t := *a
+	*a = *b
+	*b = t
+}
