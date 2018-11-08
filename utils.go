@@ -28,3 +28,33 @@ func Swap(a *int, b *int) {
 	*a = *b
 	*b = t
 }
+
+func MoveToStart(array []int, position int) []int {
+	movedArray := make([]int, len(array))
+	index := 0
+	movedArray[index] = array[position]
+
+	for i := 0; i < len(array); i++ {
+		if i != position {
+			movedArray[index+1] = array[i]
+			index++
+		}
+	}
+
+	return movedArray
+}
+
+func PickAndDrop(array []int, pickPosition int, dropPosition int) []int {
+
+	if pickPosition <= dropPosition {
+		return array
+	}
+
+	pdArray := make([]int, 0)
+	pdArray = append(pdArray, array[:dropPosition]...)
+	pdArray = append(pdArray, array[pickPosition])
+	pdArray = append(pdArray, array[dropPosition:pickPosition]...)
+	pdArray = append(pdArray, array[pickPosition+1:]...)
+
+	return pdArray
+}
